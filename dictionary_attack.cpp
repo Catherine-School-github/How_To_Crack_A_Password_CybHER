@@ -49,13 +49,13 @@ string setting_password(void)
         //random number to get random password
         int random_time;
         srand(time(0)); //uses current time for random seed
-        random_time = rand() % 999998 + 1; //stores number between 1 and 999,998 into random_time (999,998 is amount of password is password_list.txt)
+        random_time = rand() % 1000 + 1; //stores number between 1 and 1000 into random_time (1,000 is password_list.txt known "clean" password (no curse words))
 
-        //cout << random_time; //DEBUGING/MAKES SURE IT WORKS
+        cout << random_time; //DEBUGING/MAKES SURE IT WORKS
 
 
         ifstream set_password;
-        set_password.open("password_list.txt");
+        set_password.open("password_list_BACKUP.txt");
 
         while (counter < random_time)
         {
@@ -76,7 +76,7 @@ void guess_the_password(string password)
     string current_guess;
 
     ifstream get_password;
-    get_password.open("password_list.txt");
+    get_password.open("password_list_BACKUP.txt");
 
     while (get_password && current_guess != password)
     {
