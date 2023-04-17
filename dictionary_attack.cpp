@@ -1,7 +1,7 @@
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <ctime>
+#include <iostream> //used for trying into the computer, and displaying results
+#include <fstream>  //used for opening the password_list.txt file
+#include <cstdlib>  //used for random number generation
+#include <ctime>    //used to get time for random number generation
 
 using namespace std;
 
@@ -34,7 +34,7 @@ string setting_password(void)
     int option = 0;
     string password;
 
-    cout << "do you want to enter your own password or get a random passowrd from a list.\n1 for entering your own password, 2 for a random password: ";
+    cout << "Do you want to enter your own password or get a random passowrd from a list?.\n1 for entering your own password, 2 for a random password: ";
     cin >> option;
 
     if (option == 1)
@@ -55,7 +55,7 @@ string setting_password(void)
 
 
         ifstream set_password;
-        set_password.open("password_list_BACKUP.txt");
+        set_password.open("password_list.txt");
 
         while (counter < random_time)
         {
@@ -76,7 +76,7 @@ void guess_the_password(string password)
     string current_guess;
 
     ifstream get_password;
-    get_password.open("password_list_BACKUP.txt");
+    get_password.open("password_list.txt");
 
     while (get_password && current_guess != password)
     {
