@@ -5,64 +5,101 @@
 
 using namespace std;
 
-
-
-string setting_password(void);
-void guess_the_password(string password);
+int rand_or_input(void);
+string getting_username(void);
+string setting_password(int decision);
+string guess_the_password(string password);
 
 int main (void)
 {
     //variables needed for password guessing
+    int decision;
+    string username;
     string password;
-    string current_guess;
+    string found_password;
 
+    decision = rand_or_input();
 
-    password = setting_password();
+    username = getting_username();
 
-    guess_the_password(password);
+    password = setting_password(decision);
 
+    found_password = guess_the_password(password);
+
+    if (found_password == password)
+    {
+        cout << "\n\n!!!Password Found!!!\n";
+        cout << "Your username is " << username << endl;
+        cout << "Your social security number is: 401493105\n";
+        cout << "Your phone number is: 605-482-4184\n";
+        cout << "Your address is: 1234 Street street, Madison SD\n";
+    }
+    else
+    {
+        cout << "\n\nYour password was not found in the dictionary!!\n";
+    }
 
     return 0;
 }
 
 
-
-
-//sets the password to a random word in the wordlist
-string setting_password(void)
+//decides if user wants to enter their own password or get a random password
+int rand_or_input (void)
 {
-    int option = 0;
+    int decision;
+
+    cout << "Would you like to enter your own password or get a random password. 1 for your own password, 2 for a random password: ";
+    cin >> decision;
+
+    return decision;
+}
+
+
+//gets the username of the person
+string getting_username(void)
+{
+    string username;
+    cout << "Enter your username: ";
+    cin >> username;
+
+    return username;
+}
+
+
+//sets the password
+string setting_password(int decision)
+{
     string password;
 
-    cout << "Do you want to enter your own password or get a random passowrd from a list?\n1 for entering your own password, 2 for a random password: ";
-    cin >> option;
-
-    if (option == 1)
+    //user wanted their own password
+    if (decision == 1)
     {
         cout << "Enter a password: ";
         cin >> password;
     }
 
+    //user wanted random password
     else
     {
         int counter = 0;
-        //random number to get random password
-        int random_time;
+        int random_time;    //random number to get random password
         srand(time(0)); //uses current time for random seed
         random_time = rand() % 1000 + 1; //stores number between 1 and 1000 into random_time (1,000 is password_list.txt known "clean" password (no curse words))
 
-       //cout << random_time; //DEBUGING/MAKES SURE IT WORKS
-
-
+        //opens file to set_password
         ifstream set_password;
         set_password.open("password_list.txt");
 
+        //while the counter != random number
         while (counter < random_time)
         {
+            //sets the password to the current password in the file. (THIS PROBABLY CAN BE DONE BETTER BUT IT WORKS FINE)
             set_password >> password;
             counter++;
         }
+
         set_password.close();
+        cout <<"Your new password is: " << password << endl;
     }
 
     return password;
@@ -70,13 +107,10 @@ string setting_password(void)
 }
 
 
-void guess_the_password(string password)
+string guess_the_password(string password)
 {
-
     string current_guess;
-    int time1, time2, total_time;
 
-    time1 = time(0);
     ifstream get_password;
     get_password.open("password_list.txt");
 
@@ -87,21 +121,6 @@ void guess_the_password(string password)
 
     get_password.close();
 
-    if (get_password)
-    {
-        cout <<"\n\nThe password " << current_guess << " was found in the dictionary" << endl;
-
-        //code to calculate how long it took (this is almost promised to always be 0)
-        time2 = time(0);    //set time2 to current time
-        total_time = time2 - time1; //set total_time to time2 - time1, therefore getting the time it took to find the password
-        cout << "It took " << total_time << " seconds to guess " << current_guess << ". Wow isn't that fast!!\n\n";   //display the result
-
-    }
-    else
-    {
-        cout << "\n\nThe password was not found in the dictionary " << endl;
-    }
-
-    return;
+    return current_guess;
 
 }
