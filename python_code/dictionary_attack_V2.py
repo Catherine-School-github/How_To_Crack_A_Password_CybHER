@@ -85,4 +85,6 @@ else:
     print("The password {} was not found in this dictionary!!".format(password.strip()))
 
 
+password_file.close()
+
 
