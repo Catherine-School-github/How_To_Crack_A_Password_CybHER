@@ -75,14 +75,14 @@ total_time = '%.10f' % total_time
 
 if (found_password):
     print("!!!Password Found!!!")
-    print("Welcome in " + username)
+    print("Welcome in", username)
     print("Your social security number is: 149418269")
     print("Your phone number is: 605-941-3815")
     print("Your address is: Definitely Real Street street, Sioux Falls SD")
     print("")
-    print("It only took {} seconds to get your information with that password and this dictionary, maybe you want to change your password and try again?".format(total_time))
+    print("It only took ", total_time , " seconds to get your information with that password and this dictionary, maybe you want to change your password and try again?")
 else:
-    print("The password {} was not found in this dictionary!!".format(password.strip()))
+    print("The password ", password.strip(), " was not found in this dictionary!!")
 
 
 password_file.close()

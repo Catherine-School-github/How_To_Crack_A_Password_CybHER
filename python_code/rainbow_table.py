@@ -59,7 +59,7 @@ found_hash = cracking_hash(hashed_password)
 
 if (found_hash):
     print("!!! Hash Found !!!")
-    print("Welcome in {}".format(username))
+    print("Welcome in", username)
     print("Your social security number is: 429815083")
     print("Your phone number is: 605-191-4816")
     print("Your address is: Legit Address rd, Brandon SD")
